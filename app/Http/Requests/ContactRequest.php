@@ -28,6 +28,15 @@ class ContactRequest extends FormRequest
             'email'      => ['required' , 'email'  , 'max:55' ],
             'phone'      => ['required' , 'string' , 'max:55' ],
             'message'    => ['required' , 'string' , 'max:1000' ],
+            'g-recaptcha-response' => ['required', 'captcha'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'g-recaptcha-response.required' => 'You must check the reCAPTCHA.',
+            'g-recaptcha-response.captcha' => 'Captcha error! Try again later or contact the site admin.',
         ];
     }
 }

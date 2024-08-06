@@ -196,6 +196,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+
     ],
 
     /*
@@ -211,6 +214,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         'Share' => Jorenvh\Share\ShareFacade::class,
+        'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
     ])->toArray(),
 
 ];

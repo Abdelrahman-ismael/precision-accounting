@@ -80,9 +80,18 @@
 
             <div class="row mt--40 row--15 pt--15">
                 <div class="col-lg-7"  data-sal="slide-right" data-sal-duration="700" data-sal-delay="300" data-sal-easing="ease-out-back">
-                    <!--<form class="contact-form-1 rwt-dynamic-form" id="contact-form" action="{{ route("contact.send") }}" method="POST" >-->
-                    <form class="contact-form-1 rwt-dynamic-form" id="contact-form">
+                    <form class="contact-form-1 rwt-dynamic-form" id="contact-form" action="{{ route("contact.send") }}" method="POST" >
+
+                        <!-- Display Captcha Error -->
+                        {!! NoCaptcha::renderJs() !!}
+                        @if ($errors->has('g-recaptcha-response'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ $errors->first('g-recaptcha-response') }}
+                            </div>
+                        @endif
+
                         @csrf
+
                         <div class="form-group">
                             <input type="text" name="name" id="name" placeholder="Your Name..." value="{{ old("name") }}" />
                             @error('name')
@@ -96,7 +105,7 @@
                             @enderror
                             <span class="fs-4">
                                 By providing a telephone number and submitting the form you are consenting
-                                to be contacted by SMS text message. Message & data rates may 
+                                to be contacted by SMS text message. Message & data rates may
                                 apply. Reply STOP to opt out of further messaging.
                             </span>
                         </div>
@@ -113,6 +122,10 @@
                             @enderror
                         </div>
 
+                        <div class="form-group">
+                            {!! NoCaptcha::display() !!}
+                        </div>
+                        
                         <div class="form-group">
                             <button type="submit" id="submit" class="btn-default btn-large rn-btn">
                                 <span>Submit Now</span>
